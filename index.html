@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CupCake MakeUp – Tienda de Maquillaje</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --pink-deep: #c2185b;
+      --pink-mid:  #e91e8c;
+      --pink-soft: #f8bbd0;
+      --pink-pale: #fce4ec;
+      --cream:     #fff9fb;
+      --gold:      #d4a0b5;
+      --text-dark: #3a1a2e;
+      --text-med:  #6d3a55;
+      --white:     #ffffff;
+      --shadow:    rgba(194,24,91,.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    header {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      background: rgba(255,249,251,.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--pink-soft);
+      box-shadow: 0 2px 24px var(--shadow);
+    }
+    nav {
+      max-width: 1200px; margin: auto;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.7rem 2rem;
+    }
+    .logo-wrap { display: flex; align-items: center; gap: .7rem; text-decoration: none; }
+    .logo-icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 16px var(--shadow);
+      overflow: hidden;
+    }
+    .logo-icon img,
+    .logo-img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .logo-text { font-family: 'Playfair Display', serif; color: var(--pink-deep); font-size: 1.25rem; line-height: 1.15; }
+    .logo-text span { display: block; font-size: .72rem; color: var(--text-med); font-family: 'Nunito', sans-serif; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+    nav ul { list-style: none; display: flex; gap: 1.5rem; }
+    nav ul li a {
+      text-decoration: none; font-weight: 600; font-size: .9rem;
+      color: var(--text-med); letter-spacing: .04em; text-transform: uppercase;
+      padding-bottom: 3px; border-bottom: 2px solid transparent;
+      transition: color .25s, border-color .25s;
+    }
+    nav ul li a:hover { color: var(--pink-mid); border-color: var(--pink-mid); }
+
+    /* hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 26px; height: 2.5px; background: var(--pink-deep); border-radius: 4px; transition: .3s; }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    #inicio {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #fce4ec 0%, #f8bbd0 40%, #f48fb1 80%, #e91e8c11 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 7rem 2rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero-bubbles span {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff6 40%, #f48fb133);
+      animation: float 6s ease-in-out infinite;
+    }
+    .hero-bubbles span:nth-child(1){ width:220px;height:220px;top:5%;left:-5%;animation-delay:0s;}
+    .hero-bubbles span:nth-child(2){ width:140px;height:140px;top:60%;left:10%;animation-delay:1.5s;}
+    .hero-bubbles span:nth-child(3){ width:180px;height:180px;top:15%;right:3%;animation-delay:3s;}
+    .hero-bubbles span:nth-child(4){ width:90px;height:90px;bottom:10%;right:20%;animation-delay:2s;}
+    @keyframes float { 0%,100%{transform:translateY(0);}50%{transform:translateY(-22px);} }
+
+    .hero-content { text-align: center; max-width: 680px; position: relative; z-index: 1; }
+    .hero-badge {
+      display: inline-block; background: var(--pink-deep); color: #fff;
+      font-size: .75rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+      padding: .35rem 1.2rem; border-radius: 50px; margin-bottom: 1.2rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(2.6rem,7vw,4.5rem);
+      line-height: 1.1; color: var(--pink-deep);
+      text-shadow: 0 2px 24px rgba(194,24,91,.12);
+    }
+    .hero-title em { font-style: italic; color: var(--pink-mid); }
+    .hero-subtitle { margin: 1.2rem 0 2rem; font-size: 1.1rem; color: var(--text-med); font-weight: 400; }
+    .btn-primary {
+      display: inline-block; background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+      color: #fff; font-weight: 700; font-size: 1rem; letter-spacing: .06em;
+      text-transform: uppercase; text-decoration: none;
+      padding: .85rem 2.4rem; border-radius: 50px;
+      box-shadow: 0 6px 28px var(--shadow);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 36px var(--shadow); }
+    .hero-img-wrap {
+      margin-top: 3rem;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;
+    }
+    .hero-img-wrap img {
+      width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px;
+      box-shadow: 0 8px 28px var(--shadow);
+      transition: transform .4s;
+    }
+    .hero-img-wrap img:hover { transform: scale(1.05); }
+
+    /* ─── SECTIONS COMMON ─────────────────────────────── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1200px; margin: auto; }
+    .section-label {
+      font-size: .78rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--pink-mid); margin-bottom: .5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(1.8rem,4vw,2.8rem);
+      color: var(--text-dark); line-height: 1.2; margin-bottom: 1rem;
+    }
+    .section-line {
+      width: 60px; height: 3px; border-radius: 4px;
+      background: linear-gradient(90deg,var(--pink-mid),var(--pink-deep));
+      margin-bottom: 1.8rem;
+    }
+
+    /* ─── NOSOTROS ────────────────────────────────────── */
+    #nosotros { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center; }
+    .about-img { position: relative; }
+    .about-img img {
+      width: 100%; border-radius: 28px;
+      box-shadow: 0 16px 48px var(--shadow);
+      object-fit: cover; aspect-ratio: 4/5;
+    }
+    .about-badge-float {
+      position: absolute; bottom: -20px; right: -20px;
+      background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+      color: #fff; border-radius: 20px; padding: 1.1rem 1.4rem;
+      text-align: center; box-shadow: 0 8px 24px var(--shadow);
+    }
+    .about-badge-float strong { display: block; font-size: 2rem; font-family: 'Playfair Display', serif; }
+    .about-badge-float span { font-size: .75rem; text-transform: uppercase; letter-spacing: .1em; }
+    .about-text p { color: var(--text-med); line-height: 1.8; margin-bottom: 1rem; }
+    .values-list { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.4rem; }
+    .values-list li {
+      list-style: none; background: var(--pink-pale);
+      color: var(--pink-deep); font-weight: 700; font-size: .82rem;
+      padding: .4rem 1rem; border-radius: 50px; letter-spacing: .05em;
+    }
+
+    /* ─── PROPIETARIA ─────────────────────────────────── */
+    #propietaria { background: linear-gradient(135deg, var(--pink-pale), #fff); }
+    .owner-card {
+      display: flex; gap: 3rem; align-items: center;
+      background: var(--white); border-radius: 28px;
+      padding: 2.5rem; box-shadow: 0 12px 48px var(--shadow);
+    }
+    .owner-photo {
+      flex-shrink: 0; width: 230px; height: 280px;
+      border-radius: 24px; overflow: hidden;
+      box-shadow: 0 8px 32px var(--shadow);
+      background: var(--pink-soft);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .owner-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .owner-photo .placeholder-icon { font-size: 5rem; color: var(--pink-deep); opacity: .4; }
+    .owner-info h3 {
+      font-family: 'Playfair Display', serif; font-size: 2rem;
+      color: var(--pink-deep); margin-bottom: .3rem;
+    }
+    .owner-info .owner-role {
+      font-size: .82rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--pink-mid); margin-bottom: 1rem;
+    }
+    .owner-info p { color: var(--text-med); line-height: 1.8; margin-bottom: .9rem; }
+    .owner-quote {
+      border-left: 4px solid var(--pink-mid);
+      padding-left: 1.2rem; margin-top: 1.4rem;
+      font-family: 'Playfair Display', serif; font-style: italic;
+      font-size: 1.1rem; color: var(--text-dark);
+    }
+
+    /* ─── PRODUCTOS ───────────────────────────────────── */
+    #productos { background: var(--cream); }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1.8rem; }
+    .product-card {
+      background: var(--white); border-radius: 22px;
+      overflow: hidden; box-shadow: 0 4px 20px var(--shadow);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .product-card:hover { transform: translateY(-8px); box-shadow: 0 16px 48px var(--shadow); }
+    .product-card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; }
+    .product-info { padding: 1.2rem; }
+    .product-cat {
+      font-size: .72rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: var(--pink-mid); margin-bottom: .3rem;
+    }
+    .product-info h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--text-dark); }
+    .product-info p { font-size: .85rem; color: var(--text-med); margin-top: .3rem; }
+
+    /* ─── TIENDA / PROMO ──────────────────────────────── */
+    #tienda { background: var(--white); }
+    .promo-banner {
+      background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+      border-radius: 24px; padding: 3rem 2.5rem;
+      color: #fff; text-align: center; margin-bottom: 3rem;
+      position: relative; overflow: hidden;
+    }
+    .promo-banner::before {
+      content: '💄'; position: absolute; top: -20px; left: -20px;
+      font-size: 7rem; opacity: .12; transform: rotate(-20deg);
+    }
+    .promo-banner::after {
+      content: '✨'; position: absolute; bottom: -10px; right: 10px;
+      font-size: 5rem; opacity: .15;
+    }
+    .promo-banner h3 { font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: .5rem; }
+    .promo-days { display: flex; justify-content: center; gap: 1rem; margin-top: 1.2rem; flex-wrap: wrap; }
+    .promo-day {
+      background: rgba(255,255,255,.22); backdrop-filter: blur(6px);
+      border: 2px solid rgba(255,255,255,.4);
+      border-radius: 50px; padding: .5rem 1.4rem;
+      font-weight: 700; font-size: .9rem; letter-spacing: .05em;
+    }
+    .store-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 1.8rem; }
+    .store-item {
+      background: var(--pink-pale); border-radius: 20px; padding: 1.5rem;
+      display: flex; align-items: center; gap: 1rem;
+      box-shadow: 0 2px 12px var(--shadow); transition: transform .25s;
+    }
+    .store-item:hover { transform: translateY(-4px); }
+    .store-item-icon {
+      width: 56px; height: 56px; border-radius: 16px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--pink-mid), var(--pink-deep));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; color: #fff;
+    }
+    .store-item h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--text-dark); }
+    .store-item p { font-size: .82rem; color: var(--text-med); margin-top: .2rem; }
+
+    /* ─── CONTACTO ────────────────────────────────────── */
+    #contacto { background: linear-gradient(135deg, #fce4ec, #fff); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .contact-card {
+      background: var(--white); border-radius: 24px; padding: 2rem;
+      box-shadow: 0 8px 32px var(--shadow);
+    }
+    .contact-card h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--pink-deep); margin-bottom: 1.5rem; }
+    .contact-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.3rem; }
+    .contact-icon {
+      width: 44px; height: 44px; border-radius: 14px; flex-shrink: 0;
+      background: var(--pink-pale); display: flex; align-items: center; justify-content: center;
+      color: var(--pink-deep); font-size: 1.1rem;
+    }
+    .contact-label { font-size: .73rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--pink-mid); }
+    .contact-value { font-size: .95rem; color: var(--text-dark); font-weight: 600; }
+    .contact-value a { color: var(--text-dark); text-decoration: none; }
+    .contact-value a:hover { color: var(--pink-mid); }
+
+    /* Map mini */
+    .map-mini {
+      display: block; border-radius: 18px; overflow: hidden;
+      box-shadow: 0 4px 18px var(--shadow);
+      text-decoration: none; position: relative;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .map-mini:hover { transform: translateY(-4px); box-shadow: 0 10px 32px var(--shadow); }
+    .map-mini img { width: 100%; display: block; border-radius: 18px; }
+    .map-mini-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(0deg, rgba(194,24,91,.85), transparent);
+      color: #fff; padding: .8rem 1rem;
+      display: flex; align-items: center; gap: .6rem;
+      font-weight: 700; font-size: .9rem; border-radius: 0 0 18px 18px;
+    }
+
+    /* Social links */
+    .social-links { display: flex; flex-direction: column; gap: .8rem; margin-top: 1.5rem; }
+    .social-btn {
+      display: flex; align-items: center; gap: 1rem;
+      padding: .85rem 1.4rem; border-radius: 50px;
+      text-decoration: none; font-weight: 700; font-size: .95rem;
+      transition: transform .25s, box-shadow .25s;
+      box-shadow: 0 4px 16px rgba(0,0,0,.1);
+    }
+    .social-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,.15); }
+    .social-btn.instagram { background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); color: #fff; }
+    .social-btn.whatsapp { background: #25D366; color: #fff; }
+    .social-btn i { font-size: 1.25rem; }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--text-dark); color: rgba(255,255,255,.75);
+      text-align: center; padding: 2.5rem 2rem;
+    }
+    footer .footer-logo {
+      display: inline-flex; align-items: center; justify-content: center;
+      gap: .85rem; font-family: 'Playfair Display', serif; font-size: 1.6rem;
+      color: var(--pink-soft); margin-bottom: .5rem;
+    }
+    footer .footer-logo img {
+      width: 56px; height: 56px; border-radius: 50%; object-fit: cover;
+      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    }
+    footer p { font-size: .85rem; }
+    footer a { color: var(--pink-soft); text-decoration: none; }
+
+    /* ─── RESPONSIVE ──────────────────────────────────── */
+    @media(max-width:900px){
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .owner-card { flex-direction: column; align-items: flex-start; }
+      .owner-photo { width: 100%; height: 260px; }
+    }
+    @media(max-width:640px){
+      nav ul { display: none; flex-direction: column; position: absolute; top: 70px; left: 0; right: 0;
+               background: rgba(255,249,251,.98); padding: 1.5rem 2rem; gap: 1rem;
+               border-bottom: 1px solid var(--pink-soft); }
+      nav ul.open { display: flex; }
+      .hamburger { display: flex; }
+      .hero-img-wrap { grid-template-columns: 1fr 1fr; }
+      .hero-img-wrap img:last-child { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<header>
+  <nav>
+    <a class="logo-wrap" href="#inicio">
+      <div class="logo-icon">
+        <img src="logo.png" alt="CupCake MakeUp" class="logo-img" loading="lazy"/>
+      </div>
+      <div class="logo-text">CupCake MakeUp<span>Belleza & Estilo</span></div>
+    </a>
+    <div class="hamburger" onclick="document.querySelector('nav ul').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+    <ul>
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#tienda">Tienda</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="inicio">
+  <div class="hero-bubbles">
+    <span></span><span></span><span></span><span></span>
+  </div>
+  <div class="section-inner hero-content">
+    <div class="hero-badge">✨ Tu tienda de maquillaje favorita</div>
+    <h1 class="hero-title">Realza tu <em>belleza</em><br>con CupCake</h1>
+    <p class="hero-subtitle">Productos de maquillaje de alta calidad para que brilles todos los días. Porque cada mujer merece sentirse extraordinaria.</p>
+    <a href="#productos" class="btn-primary">Ver Productos 💄</a>
+    <div class="hero-img-wrap">
+      <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=400&q=80" alt="Maquillaje" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&q=80" alt="Cosméticos" loading="lazy"/>
+      <img src="https://images.unsplash.com/photo-1487412912498-0447578fcca8?w=400&q=80" alt="Belleza" loading="lazy"/>
+    </div>
+  </div>
+</section>
+
+<!-- NOSOTROS -->
+<section id="nosotros">
+  <div class="section-inner">
+    <p class="section-label">Quiénes somos</p>
+    <h2 class="section-title">Nuestra historia</h2>
+    <div class="section-line"></div>
+    <div class="about-grid">
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?w=600&q=80" alt="Tienda CupCake MakeUp"/>
+        <div class="about-badge-float">
+          <strong>💕</strong>
+          <span>Tu belleza,<br>nuestra pasión</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <p>En <strong>CupCake MakeUp</strong> creemos que el maquillaje es mucho más que productos — es una forma de expresión, de confianza y de arte personal. Nacimos con la misión de acercar a cada mujer los mejores cosméticos, con atención personalizada y el mejor servicio.</p>
+        <p>Contamos con una cuidada selección de marcas y productos para todo tipo de piel y estilo. Desde bases de larga duración hasta labiales vibrantes, tenemos todo lo que necesitas para crear tu look perfecto.</p>
+        <p>Estamos ubicados en Salto del Guairá, Paraguay, y también te atendemos por redes sociales y WhatsApp con todo el cariño del mundo. 🌸</p>
+        <ul class="values-list">
+          <li>💄 Calidad garantizada</li>
+          <li>🌸 Atención personalizada</li>
+          <li>✨ Variedad de productos</li>
+          <li>💕 Pasión por la belleza</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROPIETARIA -->
+<section id="propietaria">
+  <div class="section-inner">
+    <p class="section-label">Nuestra fundadora</p>
+    <h2 class="section-title">Conocé a María Luján</h2>
+    <div class="section-line"></div>
+    <div class="owner-card">
+      <div class="owner-photo">
+        <img src="Lujanburra.png" alt="María Luján Rios Flecha" loading="lazy"/>
+      </div>
+      <div class="owner-info">
+        <h3>María Luján Rios Flecha</h3>
+        <div class="owner-role">Fundadora & Propietaria – CupCake MakeUp</div>
+        <p>María Luján es una emprendedora apasionada por la belleza y el mundo del maquillaje. Desde pequeña mostró un talento especial para realzar la belleza natural de las personas, y esa pasión la llevó a convertir su sueño en realidad fundando <strong>CupCake MakeUp</strong>.</p>
+        <p>Con dedicación, esfuerzo y mucho amor, construyó una tienda donde cada clienta es especial. María Luján se caracteriza por su trato cálido, su conocimiento profundo de productos cosméticos y su compromiso con ofrecer siempre lo mejor.</p>
+        <p>Su visión es que cada mujer pueda acceder a productos de calidad y salir de la tienda sintiéndose más segura y bella que nunca.</p>
+        <blockquote class="owner-quote">
+          "El maquillaje no cambia quien eres, lo que hace es revelar la belleza que ya existe en ti."
+        </blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTOS -->
+<section id="productos">
+  <div class="section-inner">
+    <p class="section-label">Lo que ofrecemos</p>
+    <h2 class="section-title">Nuestros Productos</h2>
+    <div class="section-line"></div>
+    <div class="products-grid">
+      <div class="product-card">
+        <img src="LabialesYGloss.png" alt="Labiales y Gloss"/>
+        <div class="product-info">
+          <div class="product-cat">Labios</div>
+          <h4>Labiales & Lip Gloss</h4>
+          <p>Colores vibrantes y duraderos para cada ocasión.</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?w=400&q=80" alt="Bases"/>
+        <div class="product-info">
+          <div class="product-cat">Rostro</div>
+          <h4>Bases & Correctores</h4>
+          <p>Cobertura perfecta para lucir una piel impecable.</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="paletas%20de%20sombras.png" alt="Paletas y sombras"/>
+        <div class="product-info">
+          <div class="product-cat">Ojos</div>
+          <h4>Paletas de Sombras</h4>
+          <p>Crea looks únicos con nuestras paletas de colores.</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=400&q=80" alt="Máscaras"/>
+        <div class="product-info">
+          <div class="product-cat">Ojos</div>
+          <h4>Máscaras & Delineadores</h4>
+          <p>Define tu mirada con productos de larga duración.</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="ruboreseIluminadores.png" alt="Rubores e Iluminadores"/>
+        <div class="product-info">
+          <div class="product-cat">Mejillas</div>
+          <h4>Rubores & Iluminadores</h4>
+          <p>Dale vida a tu rostro con un toque de color y luz.</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <img src="brochas%20y%20pinceles.png" alt="Brochas y pinceles"/>
+        <div class="product-info">
+          <div class="product-cat">Accesorios</div>
+          <h4>Brochas & Pinceles</h4>
+          <p>Las herramientas perfectas para una aplicación impecable.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIENDA -->
+<section id="tienda">
+  <div class="section-inner">
+    <p class="section-label">Ofertas & Promociones</p>
+    <h2 class="section-title">Nuestra Tienda</h2>
+    <div class="section-line"></div>
+
+    <div class="promo-banner">
+      <h3>🎉 ¡Promociones Especiales!</h3>
+      <p>No te pierdas nuestras ofertas exclusivas cada semana. ¡Síguenos en redes para no perderte ninguna!</p>
+      <div class="promo-days">
+        <div class="promo-day">📅 Lunes</div>
+        <div class="promo-day">📅 Miércoles</div>
+        <div class="promo-day">📅 Viernes</div>
+      </div>
+    </div>
+
+    <div class="store-grid">
+      <div class="store-item">
+        <div class="store-item-icon">💄</div>
+        <div>
+          <h4>Combos de Maquillaje</h4>
+          <p>Sets completos a precios especiales</p>
+        </div>
+      </div>
+      <div class="store-item">
+        <div class="store-item-icon">🎀</div>
+        <div>
+          <h4>Kits de Regalo</h4>
+          <p>El regalo perfecto para esa persona especial</p>
+        </div>
+      </div>
+      <div class="store-item">
+        <div class="store-item-icon">✨</div>
+        <div>
+          <h4>Productos Destacados</h4>
+          <p>Lo más vendido de la semana</p>
+        </div>
+      </div>
+      <div class="store-item">
+        <div class="store-item-icon">🛍️</div>
+        <div>
+          <h4>Envíos a Domicilio</h4>
+          <p>Recibí tus productos en casa</p>
+        </div>
+      </div>
+      <div class="store-item">
+        <div class="store-item-icon">💅</div>
+        <div>
+          <h4>Nuevos Lanzamientos</h4>
+          <p>Siempre lo último en tendencias</p>
+        </div>
+      </div>
+      <div class="store-item">
+        <div class="store-item-icon">🏷️</div>
+        <div>
+          <h4>Descuentos Especiales</h4>
+          <p>Lunes, miércoles y viernes</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACTO -->
+<section id="contacto">
+  <div class="section-inner">
+    <p class="section-label">Hablemos</p>
+    <h2 class="section-title">Contacto</h2>
+    <div class="section-line"></div>
+    <div class="contact-grid">
+
+      <!-- Info de contacto -->
+      <div class="contact-card">
+        <h3>📞 Información</h3>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-phone"></i></div>
+          <div>
+            <div class="contact-label">Teléfono</div>
+            <div class="contact-value"><a href="tel:+59585951732">+595 85951732</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:malujanriosf@gmail.com">malujanriosf@gmail.com</a></div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+          <div>
+            <div class="contact-label">Dirección</div>
+            <div class="contact-value">Salto del Guairá c/ Pitiantuta</div>
+          </div>
+        </div>
+
+        <!-- Mapa mini -->
+        <a href="https://maps.app.goo.gl/xiqG6gYgiLQwUY2d8" target="_blank" class="map-mini" title="Ver en Google Maps" style="margin-top:1rem;">
+          <img src="perspectiva_maps.png" 
+               onerror="this.src='https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=400&h=160&fit=crop&q=80'"
+               alt="Ubicación CupCake MakeUp" style="width:100%;height:160px;object-fit:cover;border-radius:18px;"/>
+          <div class="map-mini-overlay">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Ver en Google Maps →</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Redes sociales -->
+      <div class="contact-card">
+        <h3>💬 Redes Sociales</h3>
+        <p style="color:var(--text-med);margin-bottom:1.2rem;line-height:1.7;">¡Seguinos en nuestras redes y enterate de todas las novedades, promociones y looks inspiradores que publicamos para vos!</p>
+
+        <div class="social-links">
+          <a href="https://www.instagram.com/cuuppcake_makeups?igsh=c3oyMTZqOTZwMjNr" target="_blank" class="social-btn instagram">
+            <i class="fab fa-instagram"></i>
+            <span>@cuuppcake_makeups</span>
+          </a>
+          <a href="https://wa.me/595985951732" target="_blank" class="social-btn whatsapp">
+            <i class="fab fa-whatsapp"></i>
+            <span>Escríbenos por WhatsApp</span>
+          </a>
+        </div>
+
+        <div style="margin-top:2rem;padding:1.2rem;background:var(--pink-pale);border-radius:16px;">
+          <p style="font-weight:700;color:var(--pink-deep);margin-bottom:.4rem;">🕐 Horario de Atención</p>
+          <p style="color:var(--text-med);font-size:.9rem;">Lunes a Sábados: 8:00 – 20:00 hs</p>
+          <p style="color:var(--text-med);font-size:.9rem;">Domingos: Consultar disponibilidad</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="logo.png" alt="CupCake MakeUp" loading="lazy"/>
+    CupCake MakeUp
+  </div>
+  <p>Salto del Guairá c/ Pitiantuta, Paraguay</p>
+  <p style="margin-top:.5rem;">
+    <a href="mailto:malujanriosf@gmail.com">malujanriosf@gmail.com</a> · 
+    <a href="tel:+59585951732">+595985951732</a>
+  </p>
+  <p style="margin-top:1rem;font-size:.8rem;opacity:.6;">© 2025 CupCake MakeUp · Todos los derechos reservados · Hecho con 💕 para vos</p>
+</footer>
+
+</body>
+</html>
